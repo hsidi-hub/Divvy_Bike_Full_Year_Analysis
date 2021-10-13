@@ -1,0 +1,2218 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Divvy\_Bike\_Full\_Year\_Analysis.R},
+  pdfauthor={MAIN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Divvy\_Bike\_Full\_Year\_Analysis.R}
+\author{MAIN}
+\date{2021-06-18}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}   Divvy Bikes Full Year\_Analysis  \textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}\textless{}\textgreater{}}
+\CommentTok{\#===========================================================================================}
+
+\CommentTok{\# This is a Case study 1 from the Google Data Analytics Certificate (Cyclistic).}
+\CommentTok{\# It\textquotesingle{}s originally based on the case study \textquotesingle{}Sophisticated, Clear, and Polished’: }
+\CommentTok{\# Divvy and Data Visualization" written by Kevin Hartman}
+\CommentTok{\# (found here: https://artscience.blog/home/divvy{-}dataviz{-}case{-}study). }
+\CommentTok{\# The objective of this script is to to consolidate downloaded Divvy data into a single data frame }
+\CommentTok{\# and then conduct simple analysis to help answer the key question: }
+\CommentTok{\# “In what ways do members and casual riders use Divvy bikes differently?”}
+
+\CommentTok{\#=========================}
+\CommentTok{\# STEP 0: INSTALL PACKAGES}
+\CommentTok{\#=========================}
+
+\FunctionTok{library}\NormalTok{(tidyverse)  }\CommentTok{\#helps wrangle data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lubridate)  }\CommentTok{\#helps wrangle date attributes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)    }\CommentTok{\#helps visualize data}
+\FunctionTok{library}\NormalTok{(here)       }\CommentTok{\# helps upload csv files}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## here() starts at C:/Users/MAIN/Desktop/Google Cert/Google_Capstone_Project
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(arsenal)    }\CommentTok{\# helps to compare data frames}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'arsenal'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:lubridate':
+## 
+##     is.Date
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{\#getwd() \#displays your working directory}
+
+\CommentTok{\#=====================}
+\CommentTok{\# STEP 1 : UPLOAD DATA}
+\CommentTok{\#=====================}
+
+\CommentTok{\# As we have 12 files to upload, we will separate them in 4 quarters.Every quarter}
+\CommentTok{\# contains 3 month trips data.3 quarter from 2020 and 1 quarter from 2021.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q2\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ May\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_05\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Jun\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_06\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Jul\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_07\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q3\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Aug\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_08\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Sep\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_09\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Oct\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_10\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q4\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Jan\_2021 will be included in the Quarter 4 of 2020 }
+\NormalTok{ Nov\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_11\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_double(),
+##   end_station_name = col_character(),
+##   end_station_id = col_double(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Dec\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2020\_12\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_character(),
+##   end_station_name = col_character(),
+##   end_station_id = col_character(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Jan\_2021 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2021\_01\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_character(),
+##   end_station_name = col_character(),
+##   end_station_id = col_character(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q1\_2021}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Feb\_2021 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2021\_02\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_character(),
+##   end_station_name = col_character(),
+##   end_station_id = col_character(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Mar\_2021 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2021\_03\_trips.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_character(),
+##   end_station_name = col_character(),
+##   end_station_id = col_character(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ Apr\_2021 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"Case\_Study\_1\_Data"}\NormalTok{,}\StringTok{"2021\_04\_trips.csv"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   ride_id = col_character(),
+##   rideable_type = col_character(),
+##   started_at = col_datetime(format = ""),
+##   ended_at = col_datetime(format = ""),
+##   start_station_name = col_character(),
+##   start_station_id = col_character(),
+##   end_station_name = col_character(),
+##   end_station_id = col_character(),
+##   start_lat = col_double(),
+##   start_lng = col_double(),
+##   end_lat = col_double(),
+##   end_lng = col_double(),
+##   member_casual = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#==============================================================}
+\CommentTok{\# STEP 2: WRANGLING AND COMBINING DATA INTO A SINGLE DATAFRAME}
+\CommentTok{\#==============================================================}
+
+\CommentTok{\# Comparing the column names in each quarter to make sure that all of them perfectly match}
+\CommentTok{\# and could be joined into one single data frame.To do so we use comparedef}
+\CommentTok{\# function to detect any difference}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q2\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Checking columns consistency }
+\NormalTok{ May\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{( }\AttributeTok{May\_col =} \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(May\_2020) ))}
+\NormalTok{ Jun\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{jun\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Jun\_2020) ))}
+\NormalTok{ Jul\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{( }\AttributeTok{Jul\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Jul\_2020) ))}
+ 
+ \FunctionTok{comparedf}\NormalTok{(May\_Var,Jun\_Var) }\CommentTok{\# Helps to compare column names data frame in Jun and May data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = May_Var, y = Jun_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{comparedf}\NormalTok{(May\_Var,Jul\_Var) }\CommentTok{\# Helps to compare column names in July and May data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = May_Var, y = Jul_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(May\_Var,Jun\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         May_Var       1     13
+## y         Jun_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         May_col            1  character 
+## y         jun_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(May\_Var,Jul\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         May_Var       1     13
+## y         Jul_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         May_col            1  character 
+## y         Jul_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Joining all 3 data sets to make a quarter 2 of 2020 (Q2\_2020)}
+\NormalTok{  Q2\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(May\_2020,Jun\_2020,Jul\_2020 )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q3\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Checking columns consistency }
+\NormalTok{ Aug\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Aug\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Aug\_2020) ))}
+\NormalTok{ Sep\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Sep\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Sep\_2020) ))}
+\NormalTok{ Oct\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Oct\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Oct\_2020) ))}
+ 
+ \FunctionTok{comparedf}\NormalTok{(Aug\_Var,Sep\_Var) }\CommentTok{\# Helps to compare column names in August and September data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Aug_Var, y = Sep_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{comparedf}\NormalTok{(Aug\_Var,Oct\_Var) }\CommentTok{\# Helps to compare column names in August and October data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Aug_Var, y = Oct_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Aug\_Var,Sep\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Aug_Var       1     13
+## y         Sep_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Sep_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Aug\_Var,Oct\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Aug_Var       1     13
+## y         Oct_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Oct_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Joining all 3 data sets to make quarter 3 of 2020  (Q3\_2020)}
+\NormalTok{  Q3\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(Aug\_2020,Sep\_2020,Oct\_2020 )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q4\_2020 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Checking columns consistency  }
+\NormalTok{ Nov\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Aug\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Nov\_2020) ))}
+\NormalTok{ Dec\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Sep\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Dec\_2020) ))}
+\NormalTok{ Jan\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Oct\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Jan\_2021) ))}
+ 
+ \FunctionTok{comparedf}\NormalTok{(Nov\_Var,Dec\_Var)  }\CommentTok{\# Helps to compare column names in November and December data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Nov_Var, y = Dec_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{comparedf}\NormalTok{(Nov\_Var,Jan\_Var)  }\CommentTok{\# Helps to compare column names in November and January{-}2021 data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Nov_Var, y = Jan_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Nov\_Var,Dec\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Nov_Var       1     13
+## y         Dec_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Sep_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Nov\_Var,Jan\_Var)) }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Nov_Var       1     13
+## y         Jan_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Oct_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Joining all 3 data frames to make last quarter of 2020 (Q4\_2020)}
+\CommentTok{\# Note that Jan\_2021 was added to this quarter }
+\NormalTok{  Q4\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(Nov\_2020, Dec\_2020, Jan\_2021 )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q1\_2021 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Checking columns consistency }
+\NormalTok{ Feb\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Aug\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Feb\_2021) ))}
+\NormalTok{ Mar\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Sep\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Mar\_2021) ))}
+\NormalTok{ Apr\_Var}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Oct\_col =}  \FunctionTok{c}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(Apr\_2021) ))}
+ 
+ \FunctionTok{comparedf}\NormalTok{(Feb\_Var,Mar\_Var) }\CommentTok{\# Helps to compare column names in February and March data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Feb_Var, y = Mar_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{comparedf}\NormalTok{(Feb\_Var,Apr\_Var) }\CommentTok{\# Helps to compare column names in February and March data.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Compare Object
+## 
+## Function Call: 
+## comparedf(x = Feb_Var, y = Apr_Var)
+## 
+## Shared: 0 non-by variables and 13 observations.
+## Not shared: 2 variables and 0 observations.
+## 
+## Differences found in 0/0 variables compared.
+## 0 variables compared have non-identical attributes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Feb\_Var,Mar\_Var))  }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Feb_Var       1     13
+## y         Mar_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Sep_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(}\FunctionTok{comparedf}\NormalTok{(Feb\_Var,Apr\_Var))  }\CommentTok{\# Gives a detail summary of the comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Table: Summary of data.frames
+## 
+## version   arg        ncol   nrow
+## --------  --------  -----  -----
+## x         Feb_Var       1     13
+## y         Apr_Var       1     13
+## 
+## 
+## 
+## Table: Summary of overall comparison
+## 
+## statistic                                                      value
+## ------------------------------------------------------------  ------
+## Number of by-variables                                             0
+## Number of non-by variables in common                               0
+## Number of variables compared                                       0
+## Number of variables in x but not y                                 1
+## Number of variables in y but not x                                 1
+## Number of variables compared with some values unequal              0
+## Number of variables compared with all values equal                 0
+## Number of observations in common                                  13
+## Number of observations in x but not y                              0
+## Number of observations in y but not x                              0
+## Number of observations with some compared variables unequal        0
+## Number of observations with all compared variables equal          13
+## Number of values unequal                                           0
+## 
+## 
+## 
+## Table: Variables not shared
+## 
+## version   variable    position  class     
+## --------  ---------  ---------  ----------
+## x         Aug_col            1  character 
+## y         Oct_col            1  character 
+## 
+## 
+## 
+## Table: Other variables not compared
+## 
+##                                  
+##  --------------------------------
+##  No other variables not compared 
+##  --------------------------------
+## 
+## 
+## 
+## Table: Observations not shared
+## 
+##                             
+##  ---------------------------
+##  No observations not shared 
+##  ---------------------------
+## 
+## 
+## 
+## Table: Differences detected by variable
+## 
+##                                      
+##  ------------------------------------
+##  No differences detected by variable 
+##  ------------------------------------
+## 
+## 
+## 
+## Table: Differences detected
+## 
+##                          
+##  ------------------------
+##  No differences detected 
+##  ------------------------
+## 
+## 
+## 
+## Table: Non-identical attributes
+## 
+##                              
+##  ----------------------------
+##  No non-identical attributes 
+##  ----------------------------
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Joining all 3 data frames into one single data frame quarter 1 of 2021 (Q1\_2021)}
+\NormalTok{  Q1\_2021 }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(Feb\_2021, Mar\_2021, Apr\_2021 )}
+  
+\CommentTok{\# Checking the data structure through str function}
+  
+  \FunctionTok{str}\NormalTok{(Q2\_2020)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [1,094,759 x 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:1094759] "02668AD35674B983" "7A50CCAF1EDDB28F" "2FFCDFDB91FE9A52" "58991CF1DB75BA84" ...
+##  $ rideable_type     : chr [1:1094759] "docked_bike" "docked_bike" "docked_bike" "docked_bike" ...
+##  $ started_at        : POSIXct[1:1094759], format: "2020-05-27 10:03:52" "2020-05-25 10:47:11" ...
+##  $ ended_at          : POSIXct[1:1094759], format: "2020-05-27 10:16:49" "2020-05-25 11:05:40" ...
+##  $ start_station_name: chr [1:1094759] "Franklin St & Jackson Blvd" "Clark St & Wrightwood Ave" "Kedzie Ave & Milwaukee Ave" "Clarendon Ave & Leland Ave" ...
+##  $ start_station_id  : num [1:1094759] 36 340 260 251 261 206 261 180 331 219 ...
+##  $ end_station_name  : chr [1:1094759] "Wabash Ave & Grand Ave" "Clark St & Leland Ave" "Kedzie Ave & Milwaukee Ave" "Lake Shore Dr & Wellington Ave" ...
+##  $ end_station_id    : num [1:1094759] 199 326 260 157 206 22 261 180 300 305 ...
+##  $ start_lat         : num [1:1094759] 41.9 41.9 41.9 42 41.9 ...
+##  $ start_lng         : num [1:1094759] -87.6 -87.6 -87.7 -87.7 -87.7 ...
+##  $ end_lat           : num [1:1094759] 41.9 42 41.9 41.9 41.8 ...
+##  $ end_lng           : num [1:1094759] -87.6 -87.7 -87.7 -87.6 -87.6 ...
+##  $ member_casual     : chr [1:1094759] "member" "casual" "casual" "casual" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_double(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_double(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{str}\NormalTok{(Q3\_2020)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [1,543,972 x 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:1543972] "322BD23D287743ED" "2A3AEF1AB9054D8B" "67DC1D133E8B5816" "C79FBBD412E578A7" ...
+##  $ rideable_type     : chr [1:1543972] "docked_bike" "electric_bike" "electric_bike" "electric_bike" ...
+##  $ started_at        : POSIXct[1:1543972], format: "2020-08-20 18:08:14" "2020-08-27 18:46:04" ...
+##  $ ended_at          : POSIXct[1:1543972], format: "2020-08-20 18:17:51" "2020-08-27 19:54:51" ...
+##  $ start_station_name: chr [1:1543972] "Lake Shore Dr & Diversey Pkwy" "Michigan Ave & 14th St" "Columbus Dr & Randolph St" "Daley Center Plaza" ...
+##  $ start_station_id  : num [1:1543972] 329 168 195 81 658 658 196 67 153 177 ...
+##  $ end_station_name  : chr [1:1543972] "Clark St & Lincoln Ave" "Michigan Ave & 14th St" "State St & Randolph St" "State St & Kinzie St" ...
+##  $ end_station_id    : num [1:1543972] 141 168 44 47 658 658 49 229 225 305 ...
+##  $ start_lat         : num [1:1543972] 41.9 41.9 41.9 41.9 41.9 ...
+##  $ start_lng         : num [1:1543972] -87.6 -87.6 -87.6 -87.6 -87.7 ...
+##  $ end_lat           : num [1:1543972] 41.9 41.9 41.9 41.9 41.9 ...
+##  $ end_lng           : num [1:1543972] -87.6 -87.6 -87.6 -87.6 -87.7 ...
+##  $ member_casual     : chr [1:1543972] "member" "casual" "casual" "casual" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_double(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_double(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{str}\NormalTok{(Q4\_2020)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [488,123 x 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:488123] "BD0A6FF6FFF9B921" "96A7A7A4BDE4F82D" "C61526D06582BDC5" "E533E89C32080B9E" ...
+##  $ rideable_type     : chr [1:488123] "electric_bike" "electric_bike" "electric_bike" "electric_bike" ...
+##  $ started_at        : POSIXct[1:488123], format: "2020-11-01 13:36:00" "2020-11-01 10:03:26" ...
+##  $ ended_at          : POSIXct[1:488123], format: "2020-11-01 13:45:40" "2020-11-01 10:14:45" ...
+##  $ start_station_name: chr [1:488123] "Dearborn St & Erie St" "Franklin St & Illinois St" "Lake Shore Dr & Monroe St" "Leavitt St & Chicago Ave" ...
+##  $ start_station_id  : chr [1:488123] "110" "672" "76" "659" ...
+##  $ end_station_name  : chr [1:488123] "St. Clair St & Erie St" "Noble St & Milwaukee Ave" "Federal St & Polk St" "Stave St & Armitage Ave" ...
+##  $ end_station_id    : chr [1:488123] "211" "29" "41" "185" ...
+##  $ start_lat         : num [1:488123] 41.9 41.9 41.9 41.9 41.9 ...
+##  $ start_lng         : num [1:488123] -87.6 -87.6 -87.6 -87.7 -87.6 ...
+##  $ end_lat           : num [1:488123] 41.9 41.9 41.9 41.9 41.9 ...
+##  $ end_lng           : num [1:488123] -87.6 -87.7 -87.6 -87.7 -87.6 ...
+##  $ member_casual     : chr [1:488123] "casual" "casual" "casual" "casual" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_double(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_double(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{str}\NormalTok{(Q1\_2021)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [615,348 x 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:615348] "89E7AA6C29227EFF" "0FEFDE2603568365" "E6159D746B2DBB91" "B32D3199F1C2E75B" ...
+##  $ rideable_type     : chr [1:615348] "classic_bike" "classic_bike" "electric_bike" "classic_bike" ...
+##  $ started_at        : POSIXct[1:615348], format: "2021-02-12 16:14:56" "2021-02-14 17:52:38" ...
+##  $ ended_at          : POSIXct[1:615348], format: "2021-02-12 16:21:43" "2021-02-14 18:12:09" ...
+##  $ start_station_name: chr [1:615348] "Glenwood Ave & Touhy Ave" "Glenwood Ave & Touhy Ave" "Clark St & Lake St" "Wood St & Chicago Ave" ...
+##  $ start_station_id  : chr [1:615348] "525" "525" "KA1503000012" "637" ...
+##  $ end_station_name  : chr [1:615348] "Sheridan Rd & Columbia Ave" "Bosworth Ave & Howard St" "State St & Randolph St" "Honore St & Division St" ...
+##  $ end_station_id    : chr [1:615348] "660" "16806" "TA1305000029" "TA1305000034" ...
+##  $ start_lat         : num [1:615348] 42 42 41.9 41.9 41.8 ...
+##  $ start_lng         : num [1:615348] -87.7 -87.7 -87.6 -87.7 -87.6 ...
+##  $ end_lat           : num [1:615348] 42 42 41.9 41.9 41.8 ...
+##  $ end_lng           : num [1:615348] -87.7 -87.7 -87.6 -87.7 -87.6 ...
+##  $ member_casual     : chr [1:615348] "member" "casual" "member" "member" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_character(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_character(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Converting start\_station\_id and end\_station\_id that exist in Q2\_2020, Q3\_2020 , }
+\CommentTok{\# and Q4\_2020 to character, so they can match Q1\_2021 start\_station\_id}
+ 
+\NormalTok{ Q2\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{( Q2\_2020, }\AttributeTok{start\_station\_id =} \FunctionTok{as.character}\NormalTok{(start\_station\_id), }\AttributeTok{end\_station\_id=} \FunctionTok{as.character}\NormalTok{(end\_station\_id)  )}
+\NormalTok{ Q3\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{( Q3\_2020, }\AttributeTok{start\_station\_id =} \FunctionTok{as.character}\NormalTok{(start\_station\_id), }\AttributeTok{end\_station\_id=} \FunctionTok{as.character}\NormalTok{(end\_station\_id)  )}
+\NormalTok{ Q4\_2020 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{( Q4\_2020, }\AttributeTok{start\_station\_id =} \FunctionTok{as.character}\NormalTok{(start\_station\_id), }\AttributeTok{end\_station\_id=} \FunctionTok{as.character}\NormalTok{(end\_station\_id)  )}
+
+\CommentTok{\# finally we can Combine all quarters into one single data frame that called "all\_data"}
+ 
+\NormalTok{ all\_data }\OtherTok{\textless{}{-}} \FunctionTok{bind\_rows}\NormalTok{(Q2\_2020, Q3\_2020 ,Q4\_2020, Q1\_2021)}
+ 
+
+\CommentTok{\#==================================}
+\CommentTok{\# STEP3: PREPARE DATA FOR ANALYSIS}
+\CommentTok{\#==================================}
+ 
+ \FunctionTok{colnames}\NormalTok{(all\_data) }\CommentTok{\# It returns the all column names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "ride_id"            "rideable_type"      "started_at"        
+##  [4] "ended_at"           "start_station_name" "start_station_id"  
+##  [7] "end_station_name"   "end_station_id"     "start_lat"         
+## [10] "start_lng"          "end_lat"            "end_lng"           
+## [13] "member_casual"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{head}\NormalTok{(all\_data) }\CommentTok{\# It returns the first 6 rows of the data frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 13
+##   ride_id rideable_type started_at          ended_at            start_station_n~
+##   <chr>   <chr>         <dttm>              <dttm>              <chr>           
+## 1 02668A~ docked_bike   2020-05-27 10:03:52 2020-05-27 10:16:49 Franklin St & J~
+## 2 7A50CC~ docked_bike   2020-05-25 10:47:11 2020-05-25 11:05:40 Clark St & Wrig~
+## 3 2FFCDF~ docked_bike   2020-05-02 14:11:03 2020-05-02 15:48:21 Kedzie Ave & Mi~
+## 4 58991C~ docked_bike   2020-05-02 16:25:36 2020-05-02 16:39:28 Clarendon Ave &~
+## 5 A79651~ docked_bike   2020-05-29 12:49:54 2020-05-29 13:27:11 Hermitage Ave &~
+## 6 1466C5~ docked_bike   2020-05-29 13:27:24 2020-05-29 14:14:45 Halsted St & Ar~
+## # ... with 8 more variables: start_station_id <chr>, end_station_name <chr>,
+## #   end_station_id <chr>, start_lat <dbl>, start_lng <dbl>, end_lat <dbl>,
+## #   end_lng <dbl>, member_casual <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{tail}\NormalTok{(all\_data) }\CommentTok{\# It returns the last 6  rows of the data frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 13
+##   ride_id rideable_type started_at          ended_at            start_station_n~
+##   <chr>   <chr>         <dttm>              <dttm>              <chr>           
+## 1 6B0D43~ classic_bike  2021-04-23 05:42:14 2021-04-23 05:48:27 Mies van der Ro~
+## 2 461A6B~ classic_bike  2021-04-09 17:09:03 2021-04-09 17:16:16 Mies van der Ro~
+## 3 CF1D3A~ docked_bike   2021-04-04 13:27:08 2021-04-04 14:41:11 Mies van der Ro~
+## 4 4308AD~ classic_bike  2021-04-30 18:15:40 2021-04-30 19:12:44 Mies van der Ro~
+## 5 04DFB5~ electric_bike 2021-04-18 11:40:37 2021-04-18 11:46:03 Mies van der Ro~
+## 6 DB6F78~ classic_bike  2021-04-23 19:22:16 2021-04-23 19:41:07 Kedzie Ave & Pa~
+## # ... with 8 more variables: start_station_id <chr>, end_station_name <chr>,
+## #   end_station_id <chr>, start_lat <dbl>, start_lng <dbl>, end_lat <dbl>,
+## #   end_lng <dbl>, member_casual <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{nrow}\NormalTok{(all\_data) }\CommentTok{\# It gives the number of rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3742202
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{ncol}\NormalTok{(all\_data) }\CommentTok{\# It gives the number of columns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{dim}\NormalTok{(all\_data)  }\CommentTok{\# It gives the dimension of the data frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3742202      13
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{summary}\NormalTok{(all\_data) }\CommentTok{\# It gives a statistical summary of the data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ride_id          rideable_type        started_at                 
+##  Length:3742202     Length:3742202     Min.   :2020-05-01 00:02:07  
+##  Class :character   Class :character   1st Qu.:2020-07-23 19:27:14  
+##  Mode  :character   Mode  :character   Median :2020-09-09 15:51:13  
+##                                        Mean   :2020-10-03 00:35:53  
+##                                        3rd Qu.:2020-11-15 17:49:27  
+##                                        Max.   :2021-04-30 23:59:53  
+##                                                                     
+##     ended_at                   start_station_name start_station_id  
+##  Min.   :2020-05-01 00:13:03   Length:3742202     Length:3742202    
+##  1st Qu.:2020-07-23 19:59:58   Class :character   Class :character  
+##  Median :2020-09-09 16:08:31   Mode  :character   Mode  :character  
+##  Mean   :2020-10-03 01:00:21                                        
+##  3rd Qu.:2020-11-15 18:05:29                                        
+##  Max.   :2021-05-05 22:14:39                                        
+##                                                                     
+##  end_station_name   end_station_id       start_lat       start_lng     
+##  Length:3742202     Length:3742202     Min.   :41.64   Min.   :-87.87  
+##  Class :character   Class :character   1st Qu.:41.88   1st Qu.:-87.66  
+##  Mode  :character   Mode  :character   Median :41.90   Median :-87.64  
+##                                        Mean   :41.90   Mean   :-87.64  
+##                                        3rd Qu.:41.93   3rd Qu.:-87.63  
+##                                        Max.   :42.08   Max.   :-87.52  
+##                                                                        
+##     end_lat         end_lng       member_casual     
+##  Min.   :41.54   Min.   :-88.07   Length:3742202    
+##  1st Qu.:41.88   1st Qu.:-87.66   Class :character  
+##  Median :41.90   Median :-87.64   Mode  :character  
+##  Mean   :41.90   Mean   :-87.64                     
+##  3rd Qu.:41.93   3rd Qu.:-87.63                     
+##  Max.   :42.16   Max.   :-87.44                     
+##  NA's   :4906    NA's   :4906
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add columns such as date, Month, Day, Year, and day\_of\_week for each ride,}
+\CommentTok{\# further we can aggregate ride data at different levels}
+\CommentTok{\# There are two different methods that we can use whether the first one or the second one.}
+\CommentTok{\# will use the result of  method 2}
+
+\CommentTok{\#Method 1:}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(all\_data}\SpecialCharTok{$}\NormalTok{started\_at)  }\CommentTok{\#The default format is yyyy{-}mm{-}dd}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{Month }\OtherTok{\textless{}{-}} \FunctionTok{month}\NormalTok{(}\FunctionTok{ymd}\NormalTok{(all\_data}\SpecialCharTok{$}\NormalTok{date),}\AttributeTok{label=}\ConstantTok{TRUE}\NormalTok{) }\CommentTok{\#format(as.Date( all\_data$date), "\%m")}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{Day }\OtherTok{\textless{}{-}} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{( all\_data}\SpecialCharTok{$}\NormalTok{date), }\StringTok{"\%d"}\NormalTok{)}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{( all\_data}\SpecialCharTok{$}\NormalTok{date), }\StringTok{"\%Y"}\NormalTok{)}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{day\_of\_week }\OtherTok{\textless{}{-}} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(all\_data}\SpecialCharTok{$}\NormalTok{date), }\StringTok{"\%A"}\NormalTok{)}
+\NormalTok{ all\_data}\SpecialCharTok{$}\NormalTok{Hour }\OtherTok{\textless{}{-}} \FunctionTok{format}\NormalTok{(all\_data}\SpecialCharTok{$}\NormalTok{started\_at, }\AttributeTok{format =} \StringTok{"\%H"}\NormalTok{)}
+ 
+\CommentTok{\# Method 2 :  }
+\NormalTok{ all\_data\_v1}\OtherTok{\textless{}{-}}\NormalTok{ all\_data }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(started\_at),}
+           \AttributeTok{Month =} \FunctionTok{month}\NormalTok{(date,}\AttributeTok{label=} \ConstantTok{TRUE}\NormalTok{ ),}
+           \AttributeTok{Day   =} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(date), }\StringTok{"\%d"}\NormalTok{),}
+           \AttributeTok{Year  =} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(date), }\StringTok{"\%Y"}\NormalTok{),}
+           \AttributeTok{day\_of\_week =} \FunctionTok{format}\NormalTok{(}\FunctionTok{as.Date}\NormalTok{(date), }\StringTok{"\%A"}\NormalTok{),}
+           \AttributeTok{time =} \FunctionTok{format}\NormalTok{(started\_at, }\AttributeTok{format =} \StringTok{"\%H"}\NormalTok{))}
+ 
+\CommentTok{\# Add ride\_length}
+\NormalTok{ all\_data\_v2 }\OtherTok{\textless{}{-}}\NormalTok{all\_data\_v1 }\SpecialCharTok{\%\textgreater{}\%} 
+   \FunctionTok{mutate}\NormalTok{( }\AttributeTok{ride\_length =} \FunctionTok{difftime}\NormalTok{(ended\_at,started\_at), }\AttributeTok{.keep =} \StringTok{"all"}\NormalTok{)}
+ 
+\CommentTok{\# convert ride\_length to numerical values}
+\NormalTok{ all\_data\_v3 }\OtherTok{\textless{}{-}}\NormalTok{all\_data\_v2 }\SpecialCharTok{\%\textgreater{}\%} 
+   \FunctionTok{mutate}\NormalTok{( }\AttributeTok{ride\_length =} \FunctionTok{as.numeric}\NormalTok{(ride\_length))}
+   
+ \FunctionTok{sum}\NormalTok{(all\_data\_v3}\SpecialCharTok{$}\NormalTok{ride\_length}\SpecialCharTok{\textless{}=}\DecValTok{0}\NormalTok{)  }\CommentTok{\# Gives number of ride\_length observations that are \textless{}=0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10917
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{sum}\NormalTok{(all\_data\_v3}\SpecialCharTok{$}\NormalTok{ride\_length}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{) }\CommentTok{\# Gives number of ride\_length observations that are  \textgreater{}0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3731285
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# To keep only the good data, Some ride\_lengths are negative so we have to remove them }
+\CommentTok{\# There are two methods that we can use }
+\CommentTok{\# 1:{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{     data\_v4 }\OtherTok{\textless{}{-}}\NormalTok{ all\_data\_v3[}\SpecialCharTok{!}\NormalTok{(all\_data\_v3}\SpecialCharTok{$}\NormalTok{ride\_length }\SpecialCharTok{\textless{}}\DecValTok{0}\NormalTok{),]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2:with pipe}
+\NormalTok{   all\_data\_v4 }\OtherTok{\textless{}{-}}\NormalTok{ all\_data\_v3 }\SpecialCharTok{\%\textgreater{}\%} 
+     \FunctionTok{filter}\NormalTok{( ride\_length }\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)}
+   
+\CommentTok{\# Check the structure of columns}
+   \FunctionTok{str}\NormalTok{(all\_data\_v4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [3,731,285 x 21] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:3731285] "02668AD35674B983" "7A50CCAF1EDDB28F" "2FFCDFDB91FE9A52" "58991CF1DB75BA84" ...
+##  $ rideable_type     : chr [1:3731285] "docked_bike" "docked_bike" "docked_bike" "docked_bike" ...
+##  $ started_at        : POSIXct[1:3731285], format: "2020-05-27 10:03:52" "2020-05-25 10:47:11" ...
+##  $ ended_at          : POSIXct[1:3731285], format: "2020-05-27 10:16:49" "2020-05-25 11:05:40" ...
+##  $ start_station_name: chr [1:3731285] "Franklin St & Jackson Blvd" "Clark St & Wrightwood Ave" "Kedzie Ave & Milwaukee Ave" "Clarendon Ave & Leland Ave" ...
+##  $ start_station_id  : chr [1:3731285] "36" "340" "260" "251" ...
+##  $ end_station_name  : chr [1:3731285] "Wabash Ave & Grand Ave" "Clark St & Leland Ave" "Kedzie Ave & Milwaukee Ave" "Lake Shore Dr & Wellington Ave" ...
+##  $ end_station_id    : chr [1:3731285] "199" "326" "260" "157" ...
+##  $ start_lat         : num [1:3731285] 41.9 41.9 41.9 42 41.9 ...
+##  $ start_lng         : num [1:3731285] -87.6 -87.6 -87.7 -87.7 -87.7 ...
+##  $ end_lat           : num [1:3731285] 41.9 42 41.9 41.9 41.8 ...
+##  $ end_lng           : num [1:3731285] -87.6 -87.7 -87.7 -87.6 -87.6 ...
+##  $ member_casual     : chr [1:3731285] "member" "casual" "casual" "casual" ...
+##  $ date              : Date[1:3731285], format: "2020-05-27" "2020-05-25" ...
+##  $ Month             : Ord.factor w/ 12 levels "Jan"<"Feb"<"Mar"<..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ Day               : chr [1:3731285] "27" "25" "02" "02" ...
+##  $ Year              : chr [1:3731285] "2020" "2020" "2020" "2020" ...
+##  $ day_of_week       : chr [1:3731285] "Wednesday" "Monday" "Saturday" "Saturday" ...
+##  $ Hour              : chr [1:3731285] "10" "10" "14" "16" ...
+##  $ time              : chr [1:3731285] "10" "10" "14" "16" ...
+##  $ ride_length       : num [1:3731285] 777 1109 5838 832 2237 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_double(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_double(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# looking for any duplicate, to do so we apply the "unique function" to ride\_id}
+\CommentTok{\# and then we compare its number of rows with the "all\_data\_v4" rows number}
+   
+\NormalTok{ unique\_Rows\_num}\OtherTok{\textless{}{-}}\FunctionTok{NROW}\NormalTok{(}\FunctionTok{unique}\NormalTok{( all\_data\_v4}\SpecialCharTok{$}\NormalTok{ride\_id)) }\CommentTok{\# Gives only the total of unique ride\_id}
+\NormalTok{ all\_rows\_num}\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(all\_data\_v4) }\CommentTok{\# The total rows of all columns}
+ \FunctionTok{all.equal}\NormalTok{(all\_rows\_num, unique\_Rows\_num) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Checking if there are missing values}
+ \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(all\_data\_v4}\SpecialCharTok{$}\NormalTok{ride\_length)) }\CommentTok{\# Gives the sum of missing values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Here we can check how many observation there for each rider type}
+ \FunctionTok{table}\NormalTok{(all\_data\_v4}\SpecialCharTok{$}\NormalTok{member\_casual) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  casual  member 
+## 1539944 2191341
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#=============================}
+\CommentTok{\# STEP 4: DESCRIPTIVE ANALYSIS}
+\CommentTok{\#=============================}
+
+\CommentTok{\# Descriptive analysis on ride\_length (in seconds) }
+
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{select}\NormalTok{(ride\_length) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{summary}\NormalTok{(ride\_length)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ride_length     
+##  Min.   :      1  
+##  1st Qu.:    470  
+##  Median :    861  
+##  Mean   :   1646  
+##  3rd Qu.:   1584  
+##  Max.   :3257001
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Reorder the day of week }
+\NormalTok{  all\_data\_v4}\SpecialCharTok{$}\NormalTok{day\_of\_week }\OtherTok{\textless{}{-}} \FunctionTok{ordered}\NormalTok{(all\_data\_v4}\SpecialCharTok{$}\NormalTok{day\_of\_week,}
+  \AttributeTok{levels=} \FunctionTok{c}\NormalTok{(}\StringTok{"Sunday"}\NormalTok{, }\StringTok{"Monday"}\NormalTok{, }\StringTok{"Tuesday"}\NormalTok{, }\StringTok{"Wednesday"}\NormalTok{, }\StringTok{"Thursday"}\NormalTok{, }\StringTok{"Friday"}\NormalTok{, }\StringTok{"Saturday"}\NormalTok{))}
+   
+\CommentTok{\# Compare casual versus members}
+\CommentTok{\# Analyze trips data by user type and day of the the week }
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(ride\_length,member\_casual,day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{group\_by}\NormalTok{(day\_of\_week,member\_casual) }\SpecialCharTok{\%\textgreater{}\%}                        \CommentTok{\# group by casuals and members}
+      \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=} \FunctionTok{mean}\NormalTok{(ride\_length), }\AttributeTok{median=}\FunctionTok{median}\NormalTok{(ride\_length),  }\CommentTok{\# statistical summary for ride length}
+          \AttributeTok{max=} \FunctionTok{max}\NormalTok{(ride\_length),}\AttributeTok{min =}\FunctionTok{min}\NormalTok{(ride\_length)) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{arrange}\NormalTok{(day\_of\_week)                          }\CommentTok{\# Sort the data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'day_of_week'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 14 x 6
+## # Groups:   day_of_week [7]
+##    day_of_week member_casual  mean median     max   min
+##    <ord>       <chr>         <dbl>  <dbl>   <dbl> <dbl>
+##  1 Sunday      casual        2988.   1452 3068756     1
+##  2 Sunday      member        1064.    765 1870176     1
+##  3 Monday      casual        2636.   1225 2227576     1
+##  4 Monday      member         911.    643 2005282     1
+##  5 Tuesday     casual        2363.   1134 2867820     1
+##  6 Tuesday     member         892.    645  906304     1
+##  7 Wednesday   casual        2395.   1097 3257001     1
+##  8 Wednesday   member         909.    649 2476260     1
+##  9 Thursday    casual        2476.   1091 2844687     1
+## 10 Thursday    member         894.    646  835186     1
+## 11 Friday      casual        2512.   1160 2866602     1
+## 12 Friday      member         935.    667  713853     1
+## 13 Saturday    casual        2752.   1391 3041567     1
+## 14 Saturday    member        1049.    766  990269     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Let\textquotesingle{}s see the average ride duration by day for rider type (casual v memeber)}
+\NormalTok{   avg\_ride\_len}\OtherTok{\textless{}{-}}\NormalTok{ all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(ride\_length,member\_casual,day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{group\_by}\NormalTok{(member\_casual,day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(ride\_length)) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{arrange}\NormalTok{(member\_casual,day\_of\_week)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Here we can the total number of rides by rider type}
+   
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{select}\NormalTok{(ride\_length,member\_casual,day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{group\_by}\NormalTok{(member\_casual,day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_rides =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{arrange}\NormalTok{(member\_casual,day\_of\_week)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 14 x 3
+## # Groups:   member_casual [2]
+##    member_casual day_of_week count_rides
+##    <chr>         <ord>             <int>
+##  1 casual        Sunday           280966
+##  2 casual        Monday           164506
+##  3 casual        Tuesday          161974
+##  4 casual        Wednesday        168575
+##  5 casual        Thursday         176284
+##  6 casual        Friday           228942
+##  7 casual        Saturday         358697
+##  8 member        Sunday           278993
+##  9 member        Monday           286980
+## 10 member        Tuesday          307033
+## 11 member        Wednesday        323505
+## 12 member        Thursday         319243
+## 13 member        Friday           334694
+## 14 member        Saturday         340893
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Here we can see the number of  rides by casual versus members}
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{group\_by}\NormalTok{(member\_casual) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_rides =}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# calculate the average}
+      \FunctionTok{arrange}\NormalTok{(member\_casual) }\SpecialCharTok{\%\textgreater{}\%}                     \CommentTok{\# sorts}
+      \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(member\_casual,count\_rides, }\AttributeTok{fill =}\NormalTok{ member\_casual  )) }\SpecialCharTok{+} \CommentTok{\# bar graphs}
+      \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)  }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Users Frequency"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Divvy_Bike_Full_Year_Analysis_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Let\textquotesingle{}s visualize ride duration averages by ride types}
+\CommentTok{\# As we already use group by(), we use  geom\_col() function instead of  geom\_bar()}
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{group\_by}\NormalTok{(member\_casual, day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{average =}\FunctionTok{mean}\NormalTok{(ride\_length)) }\SpecialCharTok{\%\textgreater{}\%}  
+      \FunctionTok{arrange}\NormalTok{(member\_casual, day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%}                 \CommentTok{\# Sorts the data}
+      \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ day\_of\_week, }\AttributeTok{y =}\NormalTok{ average , }\AttributeTok{fill =}\NormalTok{ member\_casual) ) }\SpecialCharTok{+}   \CommentTok{\# bar graphs}
+              \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{" Ride Average Duration by User types "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{Divvy_Bike_Full_Year_Analysis_files/figure-latex/unnamed-chunk-18-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# number of rides each hour by user types}
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{group\_by}\NormalTok{(member\_casual, Hour) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_rides =}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# calculate the average}
+      \CommentTok{\#arrange(member\_casual, Hour) \%\textgreater{}\%                     \# sorts}
+      \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Hour, }\AttributeTok{y =}\NormalTok{ count\_rides, }\AttributeTok{fill =}\NormalTok{ member\_casual) ) }\SpecialCharTok{+} \CommentTok{\# bar graphs}
+      \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)  }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Users Frequency By Hour"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{Divvy_Bike_Full_Year_Analysis_files/figure-latex/unnamed-chunk-18-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# number of ride each day by user types }
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{group\_by}\NormalTok{(member\_casual, day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_rides =}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# calculate the average}
+      \FunctionTok{arrange}\NormalTok{(member\_casual, day\_of\_week) }\SpecialCharTok{\%\textgreater{}\%}                     \CommentTok{\# sorts}
+      \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ day\_of\_week, }\AttributeTok{y =}\NormalTok{ count\_rides, }\AttributeTok{fill =}\NormalTok{ member\_casual) ) }\SpecialCharTok{+} \CommentTok{\# bar graphs}
+      \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)  }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{" Users Frequency By Day"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{Divvy_Bike_Full_Year_Analysis_files/figure-latex/unnamed-chunk-18-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#  number of ride each day by user types }
+\NormalTok{   all\_data\_v4 }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{group\_by}\NormalTok{(member\_casual, Month) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarize}\NormalTok{(}\AttributeTok{count\_rides =}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# calculate the average}
+      \FunctionTok{arrange}\NormalTok{(member\_casual, Month) }\SpecialCharTok{\%\textgreater{}\%}                     \CommentTok{\# sorts}
+      \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Month, }\AttributeTok{y =}\NormalTok{ count\_rides, }\AttributeTok{fill =}\NormalTok{ member\_casual) ) }\SpecialCharTok{+} \CommentTok{\# bar graphs}
+      \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)  }\SpecialCharTok{+} \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Users Frequency by month"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'member_casual'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\includegraphics{Divvy_Bike_Full_Year_Analysis_files/figure-latex/unnamed-chunk-18-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+   \CommentTok{\# geom\_bar(stat="identity", position = "dodge")}
+   
+\CommentTok{\#=================================================}
+\CommentTok{\# STEP 5: EXPORT SUMMARY FILE FOR FURTHER ANALYSIS}
+\CommentTok{\#=================================================}
+   
+   \FunctionTok{write.csv}\NormalTok{(avg\_ride\_len, }\AttributeTok{file =} \StringTok{\textquotesingle{}C:/Users/MAIN/Desktop/Google Cert/Google\_Capstone\_Project/Case\_study\_1\_Data/avg\_ride\_length.csv\textquotesingle{}}\NormalTok{)}
+   
+   \FunctionTok{str}\NormalTok{(all\_data\_v4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spec_tbl_df [3,731,285 x 21] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ ride_id           : chr [1:3731285] "02668AD35674B983" "7A50CCAF1EDDB28F" "2FFCDFDB91FE9A52" "58991CF1DB75BA84" ...
+##  $ rideable_type     : chr [1:3731285] "docked_bike" "docked_bike" "docked_bike" "docked_bike" ...
+##  $ started_at        : POSIXct[1:3731285], format: "2020-05-27 10:03:52" "2020-05-25 10:47:11" ...
+##  $ ended_at          : POSIXct[1:3731285], format: "2020-05-27 10:16:49" "2020-05-25 11:05:40" ...
+##  $ start_station_name: chr [1:3731285] "Franklin St & Jackson Blvd" "Clark St & Wrightwood Ave" "Kedzie Ave & Milwaukee Ave" "Clarendon Ave & Leland Ave" ...
+##  $ start_station_id  : chr [1:3731285] "36" "340" "260" "251" ...
+##  $ end_station_name  : chr [1:3731285] "Wabash Ave & Grand Ave" "Clark St & Leland Ave" "Kedzie Ave & Milwaukee Ave" "Lake Shore Dr & Wellington Ave" ...
+##  $ end_station_id    : chr [1:3731285] "199" "326" "260" "157" ...
+##  $ start_lat         : num [1:3731285] 41.9 41.9 41.9 42 41.9 ...
+##  $ start_lng         : num [1:3731285] -87.6 -87.6 -87.7 -87.7 -87.7 ...
+##  $ end_lat           : num [1:3731285] 41.9 42 41.9 41.9 41.8 ...
+##  $ end_lng           : num [1:3731285] -87.6 -87.7 -87.7 -87.6 -87.6 ...
+##  $ member_casual     : chr [1:3731285] "member" "casual" "casual" "casual" ...
+##  $ date              : Date[1:3731285], format: "2020-05-27" "2020-05-25" ...
+##  $ Month             : Ord.factor w/ 12 levels "Jan"<"Feb"<"Mar"<..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ Day               : chr [1:3731285] "27" "25" "02" "02" ...
+##  $ Year              : chr [1:3731285] "2020" "2020" "2020" "2020" ...
+##  $ day_of_week       : Ord.factor w/ 7 levels "Sunday"<"Monday"<..: 4 2 7 7 6 6 4 4 7 7 ...
+##  $ Hour              : chr [1:3731285] "10" "10" "14" "16" ...
+##  $ time              : chr [1:3731285] "10" "10" "14" "16" ...
+##  $ ride_length       : num [1:3731285] 777 1109 5838 832 2237 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   ride_id = col_character(),
+##   ..   rideable_type = col_character(),
+##   ..   started_at = col_datetime(format = ""),
+##   ..   ended_at = col_datetime(format = ""),
+##   ..   start_station_name = col_character(),
+##   ..   start_station_id = col_double(),
+##   ..   end_station_name = col_character(),
+##   ..   end_station_id = col_double(),
+##   ..   start_lat = col_double(),
+##   ..   start_lng = col_double(),
+##   ..   end_lat = col_double(),
+##   ..   end_lng = col_double(),
+##   ..   member_casual = col_character()
+##   .. )
+\end{verbatim}
+
+\end{document}
